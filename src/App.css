@@ -1,0 +1,23 @@
+* {
+    box-sizing: border-box;
+}
+
+#root {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.area{
+    display: flex;
+    flex-direction: row;
+    align-content: space-between;
+    padding: 10px;
+    margin: 10px;
+}
+
+.fruit counters article{
+    margin: 10px;
+    width: 100%;
+    padding: 10px;
+}
