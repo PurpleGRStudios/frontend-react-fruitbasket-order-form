@@ -13,12 +13,36 @@ function App() {
     console.log(`kiwi: ${kiwi}, banana: ${banana}, strawberry: ${strawberry}, apple: ${apple}`);
 
 
+    const [firstname, setFirstname] = React.useState('');
+    const [lastname, setLastname] = React.useState('');
+    const [age, setAge] = React.useState(0);
+    const [zipcode, setZipcode] = React.useState('');
+    const [deliveryFrequency, setDeliveryFrequency] = React.useState('week');
+    const [deliveryTimeslot, setDeliveryTimeslot] = React.useState('daytime');
+    const [remark, setRemark] = React.useState('');
+    const [agreeTerms, setAgreeTerms ] = React.useState(false);
+
+
 
     function resetFruits(){
         setApple(0);
         setBanana(0);
         setStrawberry(0);
         setKiwi(0);
+    }
+
+    function handleSubmit(e) {
+            e.preventDefault();
+            console.log(`
+         FirstName: $(firstname),
+         LastName: $(lastname),
+         Age: $(age),
+         ZipCode: $(zipcode),
+         DeliveryFrequency: $(deliveryFrequency),
+         Remark: $(remark),
+         AgreeTerms: $(agreeTerms)
+         `);
+
     }
 
   return (
@@ -85,12 +109,102 @@ function App() {
             </article>
         </section>
 
+        <form onSubmit={handleSubmit}>
+            <section className="area">
+                <label htmlFor="firstname-field"> FirstName </label>
+                <input name="firstname"
+                       id="firstname-field"
+                       type="text"
+                       value={firstname}
+                       onChange={(e) => setFirstname(e.target.value)}
+                />
+            </section>
+            <section className="area">
+                <label htmlFor="lastname-field"> Last Name </label>
+                <input name="lastname"
+                       id="lastname"
+                       type="text"
+                       value={lastname}
+                       onChange={(e) => setLastname(e.target.value)}
+                />
+            </section>
+            <section className="area">
+                <label htmlFor="age-field"> Age </label>
+                <input name="age"
+                       id="age-field"
+                       type="number"
+                       value={age}
+                       onChange={(e) => setAge(e.target.value)}
+                />
+            </section>
+            <section className="area">
+                <label htmlFor="zip-code"> Zip Code </label>
+                <input name="zip"
+                       id="zip-code"
+                       type="text"
+                       value={zipcode}
+                       onChange={(e) => setZipcode(e.target.value)}
+                />
+            </section>
+            <section className="area">
+                <label htmlFor="deliveryFrequency"> Delivery Frequency </label>
+                <select name="DeliveryFrequency"
+                        id="deliveryFrequency"
+                        value={deliveryFrequency}
+                        onChange={(e) => setDeliveryFrequency(e.target.value)}
+                >
+                    <option value="week">Every week</option>
+                    <option value="two-week">Every other week</option>
+                    <option value="month">Every month</option>
+                    <option value="year">Every year</option>
+                </select>
+            </section>
+            <section className="area">
+                <label htmlFor="deliveryTimeslot"> Daytime </label>
+                <input
+                    type="radio"
+                    value="daytime"
+                    name="timeslot"
+                    id="timeslot-field-daytime"
+                    checked={deliveryTimeslot === "daytime"}
+                    onChange={(e) => setDeliveryTimeslot(e.target.value)}
+                />
+                <label htmlFor="deliveryTimeslot"> Evening </label>
+                <input
+                    type="radio"
+                    value="evening"
+                    name="evening"
+                    id="eveningSlot"
+                    checked={deliveryTimeslot === "evening"}
+                    onChange={(e) => setDeliveryTimeslot(e.target.value)}
+                />
+            </section>
+            <section className="area">
+                <label htmlFor="remark-field"> Remarks </label>
+                <textarea
+                    name="remark"
+                    id="remark-field"
+                    value={remark}
+                    onChange={(e) => setRemark(e.target.value)}
+                    rows={6}
+                    cols={40}
+                />
+            </section>
+            <section className="area">
+                <input
+                    type="checkbox"
+                    name="agree"
+                    id="agree-field"
+                    value={agreeTerms}
+                    onChange={(e) => setAgreeTerms(e.target.checked)}
+                />
+                <label htmlFor="agree-field"> I agree with the terms </label>
+            </section>
 
-
-
-
+            <button type="submit"> Send </button>
+        </form>
     </>
-  )
+  );
 }
 
 export default App
